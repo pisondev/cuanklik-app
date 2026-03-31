@@ -1,0 +1,23 @@
+<div id="view-kalkulator" class="screen">
+    <h2>KALKULATOR</h2>
+    <div class="form-group"><label>Produk</label><input type="text" id="item_name" value="Wedang Uwuh"></div>
+    <div class="form-group"><label>B. Tetap</label><input type="number" id="fixed_cost"></div>
+    <div class="form-group"><label>B. Variabel</label><input type="number" id="variable_cost"></div>
+    <div class="form-group"><label>Margin (%)</label><input type="number" id="margin"></div>
+
+    <button class="btn" onclick="hitungProfit()">ANALISIS</button>
+    
+    <div id="btn-group-user" style="display: none;">
+        <button class="btn" id="btn-simpan" onclick="simpanKeRiwayat()" style="display: none; border-style: dashed;">SIMPAN DATA</button>
+    </div>
+
+    <div id="btn-group-guest" style="display: none; border: 1px dashed #000; padding: 10px; margin-top: 10px;">
+        <p style="font-size: 10px;">MODE TAMU: DATA TIDAK DISIMPAN</p>
+    </div>
+
+    <div id="area-hasil" style="margin-top: 15px; border: 1px solid #000; padding: 10px; display: none;">
+        <p id="hasil-teks"></p>
+    </div>
+
+    <button id="guest-back-btn" class="btn" style="margin-top: 20px; display: none;" onclick="aksiLogout()">KEMBALI KE HOME</button>
+</div>

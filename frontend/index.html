@@ -2,33 +2,186 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>CuanKlik - Dashboard</title>
-    <script src="/webui.js"></script> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CuanKlik Mobile</title>
+    
+    <link rel="stylesheet" href="styles.css" /> 
+    
+    <script src="/webui.js"></script>
+
+    <style>
+        body { 
+            margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; 
+            height: 100vh; background-color: #ffffff; font-family: monospace; 
+        }
+        
+        #iphone-simulator { 
+            width: 375px; 
+            height: 812px;
+            max-height: 90vh;
+            background-color: #f0f5ff;
+            border: 2px solid #000; 
+            position: relative; overflow: hidden; display: flex; flex-direction: column; 
+        }
+
+        .home, .outer {
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            margin: 0 !important;
+        }
+
+        .screen {
+            display: none;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            overflow-y: auto;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+        .active-screen { display: block; }
+        .active-screen { display: block; }
+
+        h1, h2, h3 { border-bottom: 1px solid #000; padding-bottom: 5px; }
+        .form-group { margin-bottom: 10px; }
+        label { display: block; margin-bottom: 2px; font-weight: bold; }
+        
+        input { 
+            width: 100%; box-sizing: border-box; padding: 8px; 
+            border: 1px solid #000; border-radius: 0; 
+            background: #fff;
+        }
+
+        .btn { 
+            width: 100%; padding: 10px; border: 1px solid #000; 
+            border-radius: 0; 
+            background: #fff; cursor: pointer; font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .btn:hover { background: #eee; }
+
+        .bottom-nav { 
+            position: absolute; bottom: 0; width: 100%; height: 60px;
+            background: #fff; border-top: 2px solid #000;
+            display: none; justify-content: space-around; align-items: center; 
+        }
+        .nav-item { cursor: pointer; font-size: 10px; text-transform: uppercase; font-weight: bold; }
+        .nav-item.active { text-decoration: underline; }
+
+        #view-home, #view-login, #view-register {
+            padding: 0 !important; 
+            align-items: center; 
+            justify-content: center;
+        }
+        
+        #view-home.active-screen, #view-login.active-screen, #view-register.active-screen {
+            display: flex !important; 
+        }
+
+        #view-kalkulator.active-screen, #view-riwayat.active-screen, #view-profil.active-screen {
+            display: block !important; 
+        }
+
+        #modul-auth, #modul-dashboard, #modul-user {
+            display: contents;
+        }
+    </style>
 </head>
 <body>
-    <h2>Kalkulator Profit UMKM</h2>
-    
-    <div id="calcForm">
-        <label>Nama Produk:</label><br>
-        <input type="text" id="item_name" value="Produk A" required><br><br>
 
-        <label>Biaya Tetap (Rp):</label><br>
-        <input type="number" id="fixed_cost" value="500000" required><br><br>
+    <div id="iphone-simulator">
+        <div id="modul-auth"></div>
+        <div id="modul-dashboard"></div>
+        <div id="modul-user"></div>
 
-        <label>Biaya Variabel / HPP (Rp):</label><br>
-        <input type="number" id="variable_cost" value="8000" required><br><br>
-
-        <label>Target Margin (%):</label><br>
-        <input type="number" id="margin" value="30" required><br><br>
-
-        <button type="button" onclick="hitungProfit()">Analisis Profit</button>
+        <div class="bottom-nav" id="bottom-navbar">
+            <div class="nav-item" id="nav-kalkulator" onclick="bukaHalaman('view-kalkulator')">Kalkulasi</div>
+            <div class="nav-item" id="nav-riwayat" onclick="bukaHalaman('view-riwayat')">Riwayat</div>
+            <div class="nav-item" id="nav-profil" onclick="bukaHalaman('view-profil')">Profil</div>
+        </div>
     </div>
 
-    <div id="area-hasil" style="margin-top: 20px; padding: 10px; border: 1px solid black; display: none;">
-        <h3>Hasil Analisis:</h3>
-        <p id="hasil-teks"></p>
-    </div>
+    <script src="./js/calculator.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/history.js"></script>
+    <script src="./js/profile.js"></script>
 
-    <script src="js/calculator.js"></script>
+    <script>
+        let isGuestMode = false;
+
+        async function muatSemuaModul() {
+            console.log("Mulai memuat modul HTML...");
+            const modulList = [
+                { id: 'modul-auth', file: 'auth.html' },
+                { id: 'modul-dashboard', file: 'dashboard.html' },
+                { id: 'modul-user', file: 'user.html' }
+            ];
+            
+            for (let modul of modulList) {
+                try {
+                    const response = await fetch(`./views/${modul.file}`);
+                    if (response.ok) {
+                        const html = await response.text();
+                        document.getElementById(modul.id).innerHTML = html;
+                        console.log(`✅ Berhasil memuat: ${modul.file}`);
+                    } else {
+                        console.warn(`⚠️ File tidak ditemukan (diabaikan sementara): ${modul.file}`);
+                    }
+                } catch (error) {
+                    console.error(`❌ Gagal fetch ${modul.file}:`, error);
+                }
+            }
+        }
+
+        function bukaHalaman(screenId) {
+            console.log(`Berpindah ke halaman: ${screenId}`);
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active-screen'));
+            const target = document.getElementById(screenId);
+            if(target) {
+                target.classList.add('active-screen');
+            } else {
+                console.error(`Elemen dengan ID ${screenId} tidak ditemukan di HTML!`);
+            }
+
+            const nav = document.getElementById('bottom-navbar');
+            const isAuthView = ['view-home', 'view-login', 'view-register'].includes(screenId);
+            
+            nav.style.display = (isAuthView || isGuestMode) ? 'none' : 'flex';
+
+            if (screenId === 'view-kalkulator') aturTombolKalkulator();
+            if (screenId === 'view-riwayat' && !isGuestMode) muatRiwayat();
+            if (screenId === 'view-profil' && !isGuestMode) muatDataProfilKeForm();
+        }
+
+        function masukSebagaiTamu() {
+            isGuestMode = true;
+            localStorage.removeItem('user_data');
+            bukaHalaman('view-kalkulator');
+        }
+
+        function aturTombolKalkulator() {
+            const isLogin = localStorage.getItem('user_data') !== null;
+            const btnUser = document.getElementById('btn-group-user');
+            const btnGuest = document.getElementById('btn-group-guest');
+            const guestBack = document.getElementById('guest-back-btn');
+            
+            if(btnUser) btnUser.style.display = isLogin ? 'block' : 'none';
+            if(btnGuest) btnGuest.style.display = (isGuestMode && !isLogin) ? 'block' : 'none';
+            if(guestBack) guestBack.style.display = isGuestMode ? 'block' : 'none';
+        }
+
+        function aksiLogout() {
+            localStorage.removeItem("user_data");
+            isGuestMode = false;
+            bukaHalaman('view-home');
+        }
+
+        window.onload = async () => {
+            await muatSemuaModul();
+            bukaHalaman('view-home');
+        };
+    </script>
 </body>
 </html>

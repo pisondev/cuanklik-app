@@ -1,0 +1,21 @@
+<div id="view-riwayat" class="screen">
+    <h2>RIWAYAT</h2>
+    <button class="btn" onclick="muatRiwayat()">REFRESH</button>
+    <table>
+        <thead><tr><th>PRODUK</th><th>HARGA</th><th>AKSI</th></tr></thead>
+        <tbody id="tabel_riwayat_body"></tbody>
+    </table>
+</div>
+
+<div id="view-profil" class="screen">
+    <h2>PROFIL</h2>
+    <form onsubmit="simpanProfil(event)">
+        <div class="form-group"><label>Email</label><input type="email" id="prof_email"></div>
+        <div class="form-group"><label>No. HP</label><input type="text" id="prof_phone"></div>
+        <div class="form-group"><label>Nama UMKM</label><input type="text" id="prof_umkm"></div>
+        <button type="submit" class="btn">UPDATE PROFIL</button>
+    </form>
+    
+    <hr style="margin-top: 30px;">
+    <button class="btn" onclick="aksiLogout()" style="background: #000; color: #fff;">LOGOUT</button>
+</div>

@@ -17,6 +17,7 @@ func main() {
 	webui.Bind(w, "Register", HandleRegister)
 	webui.Bind(w, "Login", HandleLogin)
 	webui.Bind(w, "UpdateProfile", UpdateProfile)
+	webui.Bind(w, "SaveHistory", SaveHistory)
 
 	w.SetPort(8080)
 

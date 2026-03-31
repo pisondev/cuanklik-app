@@ -1,0 +1,87 @@
+<div id="view-home" class="screen active-screen">
+    <div class="home"> 
+        <div class="container">
+            <div class="image-container">
+                <img src="./assets/logo.png" alt="Logo CuanKlik">
+            </div>
+            <p class="title">Hitung<br>BEP dan HPP<br>Produkmu</p>
+        </div>
+        <p class="description">Rancang keuntungan UMKM mu bersama dengan CuanKLIK dan Dapatkan analisis keuntungan yang akurat</p>
+        
+        <button class="button masuk" type="button" onclick="bukaHalaman('view-login')">Masuk</button>
+        <button class="button daftar" type="button" onclick="bukaHalaman('view-register')">Daftar</button>
+        
+        <div class="home-indicator"><div class="bar"></div></div>
+        
+        <div class="guest-login">
+            <a href="#" onclick="masukSebagaiTamu(); return false;">Login Sebagai Tamu</a>
+        </div>
+    </div>
+</div>
+
+<div id="view-login" class="screen">
+    <div class="outer">
+        <div class="phone"></div>
+        <div class="card"></div>
+        <div class="login-title">Masuk</div>
+        <div class="login-description">Akses kalkulasi Harga Pokok Penjualan disini!</div>
+        
+        <div class="signup">
+            <span>Belum ada akun?</span><a href="#" class="link-text" onclick="bukaHalaman('view-register'); return false;"> daftar disini</a>
+        </div>
+
+        <form onsubmit="prosesLogin(event)">
+            <div class="input-container">
+                <div style="align-self: stretch; height: 44px; position: relative">
+                    <div class="input-border"></div>
+                    <input class="input-field" type="text" id="login_username" placeholder="Username" required />
+                </div>
+            </div>
+            <div class="password-container">
+                <div style="align-self: stretch; height: 44px; position: relative">
+                    <div class="password-border"></div>
+                    <input class="password-field" type="password" id="login_password" placeholder="Password" required />
+                </div>
+            </div>
+
+            <button type="submit" style="background:transparent; border:none; padding:0; cursor:pointer;">
+                <div class="button-container" style="top: 493px;">
+                    <div class="button-bg"></div>
+                    <div class="button-text">Masuk</div>
+                </div>
+            </button>
+        </form>
+        
+        <button class="button" style="position:absolute; top: 730px; left: 112px; width: 150px; background: transparent; border: 2px solid #7f5bff; color: #7f5bff;" onclick="bukaHalaman('view-home')">Kembali ke Home</button>
+    </div>
+</div>
+
+<div id="view-register" class="screen">
+    <div class="outer">
+        <div class="phone"></div>
+        <div class="register-card"></div>
+        <div class="register-title">Daftar</div>
+        <div class="register-description">Buat akun untuk mengakses kalkulasi disini!</div>
+        
+        <div class="register-signup">
+            <span>Sudah ada akun?</span><a href="#" class="link-text" onclick="bukaHalaman('view-login'); return false;"> masuk disini</a>
+        </div>
+
+        <form onsubmit="prosesRegister(event)">
+            <div class="register-input-1"><input class="register-input-field" type="text" id="reg_username" placeholder="Username" required /></div>
+            <div class="register-input-2"><input class="register-input-field" type="text" id="reg_umkm" placeholder="Nama UMKM" required /></div>
+            <div class="register-input-3"><input class="register-input-field" type="email" id="reg_email" placeholder="Email" required /></div>
+            <div class="register-input-4"><input class="register-input-field" type="tel" id="reg_phone" placeholder="No Telepon" required /></div>
+            <div class="register-input-5"><input class="register-input-field" type="password" id="reg_password" placeholder="Password" required /></div>
+            
+            <button type="submit" style="background:transparent; border:none; padding:0; cursor:pointer;">
+                <div class="register-button-container">
+                    <div class="register-button-bg"></div>
+                    <div class="register-button-text">Daftar</div>
+                </div>
+            </button>
+        </form>
+        
+        <button class="button" style="position:absolute; top: 740px; left: 112px; width: 150px; background: transparent; border: 2px solid #7f5bff; color: #7f5bff;" onclick="bukaHalaman('view-home')">Batal</button>
+    </div>
+</div>

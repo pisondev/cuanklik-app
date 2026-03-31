@@ -1,0 +1,558 @@
+/* ===== MAIN LAYOUT STYLES ===== */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+body {
+  background-color: #f0f5ff;
+  font-family: sans-serif;
+}
+
+/* ===== LANDING PAGE (INDEX) ===== */
+.home {
+  position: relative;
+  width: 375px;
+  height: 812px;
+  background-color: #f0f5ff;
+  border-radius: 50px;
+  box-shadow: 0px 50px 100px 0px #9fabc7;
+  overflow: hidden;
+}
+
+.container {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 355px;
+  height: auto;
+  min-height: 0;
+  padding: 2px 18px 30px 10px;
+  box-sizing: border-box;
+  background-color: #e4ecfb;
+  border-radius: 40px;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 355px;
+  margin: 0;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+.button {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  width: 137px;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 15px 16px;
+  box-sizing: border-box;
+  font-size: 17px;
+  font-weight: 590;
+  line-height: 22px;
+  letter-spacing: -0.408px;
+  white-space: nowrap;
+  color: black;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  outline: none;
+  border: none;
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.button.masuk {
+  left: 30px;
+  top: 610px;
+  background: linear-gradient(17.0501deg, #cddcf6 7.5028%, #fff 100%);
+  box-shadow:
+    0px 20px 40px 0px #cedbef,
+    inset 3px 3px 10px 0px rgba(255, 255, 255, 0.72);
+}
+
+.button.daftar {
+  left: 208px;
+  top: 610px;
+  background: linear-gradient(20.7849deg, #4624c2 0%, #7f5bff 100%);
+  box-shadow:
+    0px 20px 40px 0px #bdacfb,
+    inset 0px -3px 10px 0px rgba(0, 0, 0, 0.37),
+    inset 3px 1px 15px 0px rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+.title {
+  margin: 0;
+  padding-left: 15px;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1.1;
+  color: #29235c;
+  text-align: left;
+}
+
+.description {
+  position: absolute;
+  top: 488px;
+  left: 10px;
+  width: 355px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 24px;
+  color: #000;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.home-indicator {
+  position: absolute;
+  top: 95.81%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.home-indicator .bar {
+  position: absolute;
+  bottom: 8px;
+  left: calc(50% + 0.5px);
+  transform: translateX(-50%);
+  width: 134px;
+  height: 5px;
+  background-color: rgb(74, 3, 102);
+  border-radius: 3px;
+}
+
+.guest-login {
+  position: absolute;
+  left: calc(50% - 0.5px);
+  top: 688px;
+  transform: translateX(-50%);
+  display: inline-block;
+}
+
+.guest-login a {
+  display: inline-block;
+  width: 122px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+}
+
+.guest-login a:hover {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+/* ===== LOGIN & REGISTER PAGE SHARED STYLES ===== */
+.outer {
+  width: 375px;
+  height: 812px;
+  position: relative;
+  background: #f0f5ff;
+  box-shadow: 0px 50px 100px #9fabc7;
+  overflow: hidden;
+  border-radius: 50px;
+  margin: 0 auto;
+}
+
+.phone {
+  width: 359px;
+  height: 797px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  background: #e4ecfb;
+  border-radius: 40px;
+  backdrop-filter: blur(20px);
+}
+
+.card {
+  width: 343px;
+  height: 398px;
+  left: 16px;
+  top: 207px;
+  position: absolute;
+  background: linear-gradient(
+    143deg,
+    white 0%,
+    rgba(242.25, 246.5, 255, 0.52) 48%,
+    rgba(173.85, 190.28, 223.13, 0) 100%
+  );
+  box-shadow:
+    0px 15px 30px rgba(255, 255, 255, 0.5) inset,
+    0px 30px 60px #98a7c5,
+    -10px -10px 20px rgba(209.24, 219.35, 238, 0.5) inset;
+  border-radius: 20px;
+}
+
+/* ===== LOGIN PAGE STYLES ===== */
+.login-title {
+  left: 36px;
+  top: 232px;
+  position: absolute;
+  color: black;
+  font-size: 34px;
+  font-family: Work Sans;
+  font-weight: 700;
+  line-height: 41px;
+  letter-spacing: 0.37px;
+  word-wrap: break-word;
+}
+
+.login-description {
+  width: 302px;
+  left: 36px;
+  top: 280px;
+  position: absolute;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 17px;
+  font-family: Open Sans;
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+}
+
+.signup {
+  width: 174px;
+  left: 36px;
+  top: 553px;
+  position: absolute;
+}
+
+.signup span {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 12px;
+  font-family: Open Sans;
+  font-weight: 400;
+  line-height: 16px;
+  word-wrap: break-word;
+}
+
+.signup span:last-child {
+  font-weight: 700;
+}
+
+.button-container {
+  width: 302px;
+  height: 44px;
+  left: 36px;
+  top: 493px;
+  position: absolute;
+}
+
+.button-bg {
+  width: 302px;
+  height: 44px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  background: linear-gradient(315deg, #4624c2 0%, #7f5bff 100%);
+  box-shadow:
+    0px 20px 40px #bdacfb,
+    3px 1px 15px rgba(255, 255, 255, 0.5) inset,
+    0px -3px 10px rgba(0, 0, 0, 0.37) inset;
+  border-radius: 18px;
+}
+
+.button-text {
+  width: 274px;
+  height: 21.04px;
+  left: 14px;
+  top: 11px;
+  position: absolute;
+  text-align: center;
+  color: white;
+  font-size: 17px;
+  font-family: SF Pro;
+  font-weight: 590;
+  line-height: 22px;
+  word-wrap: break-word;
+}
+
+.input-container {
+  width: 302px;
+  left: 36px;
+  top: 353px;
+  position: absolute;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.input-border {
+  width: 302px;
+  height: 44px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  border-radius: 18px;
+  border: 1px #c9d7ee solid;
+}
+
+.input-field {
+  width: 274px;
+  height: 22px;
+  left: 12px;
+  top: 11px;
+  position: absolute;
+  color: black;
+  font-size: 17px;
+  font-family: SF Pro;
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.password-container {
+  width: 302px;
+  left: 36px;
+  top: 423px;
+  position: absolute;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  display: inline-flex;
+}
+
+.password-border {
+  width: 302px;
+  height: 44px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  border-radius: 18px;
+  border: 1px #c9d7ee solid;
+}
+
+.password-field {
+  width: 274px;
+  height: 22px;
+  left: 12px;
+  top: 11px;
+  position: absolute;
+  color: black;
+  font-size: 17px;
+  font-family: SF Pro;
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+/* ===== REGISTER PAGE STYLES ===== */
+.register-card {
+  width: 343px;
+  height: 655px;
+  left: 16px;
+  top: 79px;
+  position: absolute;
+  background: linear-gradient(
+    143deg,
+    white 0%,
+    rgba(242.25, 246.5, 255, 0.52) 48%,
+    rgba(173.85, 190.28, 223.13, 0) 100%
+  );
+  box-shadow:
+    0px 15px 30px rgba(255, 255, 255, 0.5) inset,
+    0px 30px 60px #98a7c5,
+    -10px -10px 20px rgba(209.24, 219.35, 238, 0.5) inset;
+  border-radius: 20px;
+}
+
+.register-title {
+  left: 37px;
+  top: 104px;
+  position: absolute;
+  color: black;
+  font-size: 34px;
+  font-family: Work Sans;
+  font-weight: 700;
+  line-height: 41px;
+  letter-spacing: 0.37px;
+  word-wrap: break-word;
+}
+
+.register-description {
+  width: 302px;
+  left: 37px;
+  top: 152px;
+  position: absolute;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 17px;
+  font-family: Open Sans;
+  font-weight: 400;
+  line-height: 22px;
+  word-wrap: break-word;
+}
+
+.register-signup {
+  width: 176px;
+  left: 37px;
+  top: 674px;
+  position: absolute;
+}
+
+.register-signup span {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 12px;
+  font-family: Open Sans;
+  font-weight: 400;
+  line-height: 16px;
+  word-wrap: break-word;
+}
+
+.register-signup .link-text {
+  font-weight: 700;
+}
+
+.register-button-container {
+  width: 302px;
+  height: 44px;
+  left: 37px;
+  top: 614px;
+  position: absolute;
+}
+
+.register-button-bg {
+  width: 302px;
+  height: 44px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  background: linear-gradient(315deg, #4624c2 0%, #7f5bff 100%);
+  box-shadow:
+    0px 20px 40px #bdacfb,
+    3px 1px 15px rgba(255, 255, 255, 0.5) inset,
+    0px -3px 10px rgba(0, 0, 0, 0.37) inset;
+  border-radius: 18px;
+}
+
+.register-button-text {
+  width: 274px;
+  height: 21.04px;
+  left: 14px;
+  top: 11px;
+  position: absolute;
+  text-align: center;
+  color: white;
+  font-size: 17px;
+  font-family: SF Pro;
+  font-weight: 590;
+  line-height: 22px;
+  word-wrap: break-word;
+}
+
+.register-input-1 {
+  width: 302px;
+  height: 44px;
+  left: 37px;
+  top: 218px;
+  position: absolute;
+}
+
+.register-input-2 {
+  width: 302px;
+  height: 44px;
+  left: 37px;
+  top: 282px;
+  position: absolute;
+}
+
+.register-input-3 {
+  width: 302px;
+  height: 44px;
+  left: 37px;
+  top: 346px;
+  position: absolute;
+}
+
+.register-input-4 {
+  width: 302px;
+  height: 44px;
+  left: 37px;
+  top: 409px;
+  position: absolute;
+}
+
+.register-input-5 {
+  width: 302px;
+  height: 44px;
+  left: 37px;
+  top: 473px;
+  position: absolute;
+}
+
+.register-input-6 {
+  width: 302px;
+  height: 44px;
+  left: 36px;
+  top: 537px;
+  position: absolute;
+}
+
+.register-input-field {
+  width: 100%;
+  height: 100%;
+  padding: 11px 16px 11px 12px;
+  border-radius: 18px;
+  border: 1px #c9d7ee solid;
+  box-sizing: border-box;
+  color: black;
+  font-size: 17px;
+  font-family: SF Pro;
+  font-weight: 400;
+  line-height: 22px;
+  background: transparent;
+  outline: none;
+}
+
+.link-text {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 12px;
+  font-family: Open Sans;
+  font-weight: 400;
+  line-height: 16px;
+  word-wrap: break-word;
+}

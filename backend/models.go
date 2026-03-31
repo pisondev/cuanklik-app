@@ -67,3 +67,15 @@ type UpdateProfileRequest struct {
 	PhoneNumber string `json:"phone_number"`
 	UMKMName    string `json:"umkm_name"`
 }
+
+type SaveHistoryRequest struct {
+	UserID            int     `json:"user_id"`
+	ItemName          string  `json:"item_name"`
+	FixedCost         float64 `json:"fixed_cost"`
+	VariableCost      float64 `json:"variable_cost"`
+	TargetMargin      float64 `json:"target_margin_percentage"`
+	COGS              float64 `json:"cogs"`
+	IdealSellingPrice float64 `json:"ideal_selling_price"`
+	BEPUnits          int     `json:"bep_units"`
+	BEPRevenue        float64 `json:"bep_revenue"`
+}

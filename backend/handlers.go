@@ -32,19 +32,6 @@ func CalculateProfit(e webui.Event) string {
 		BEPRevenue:        bepRevenue,
 	}
 
-	stmt, err := DB.Prepare(`
-		INSERT INTO calculation_history 
-		(user_id, item_name, fixed_cost, variable_cost, target_margin_percentage, cogs, ideal_selling_price, bep_units, bep_revenue) 
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-	`)
-	if err == nil {
-		_, err = stmt.Exec(1, req.ItemName, req.FixedCost, req.VariableCost, req.TargetMargin, res.COGS, res.IdealSellingPrice, res.BEPUnits, res.BEPRevenue)
-		if err != nil {
-			fmt.Println("DB Insert Error:", err)
-		}
-		stmt.Close()
-	}
-
 	responseJSON, _ := json.Marshal(res)
 	return string(responseJSON)
 }
@@ -186,6 +173,28 @@ func UpdateProfile(e webui.Event) string {
 		fmt.Println("DB Update Error:", err)
 		res.Success = false
 		res.Message = "Failed to update profile"
+	}
+
+	responseJSON, _ := json.Marshal(res)
+	return string(responseJSON)
+}
+
+func SaveHistory(e webui.Event) string {
+	payloadJSON, _ := webui.GetArg[string](e)
+	var req SaveHistoryRequest
+	json.Unmarshal([]byte(payloadJSON), &req)
+
+	_, err := DB.Exec(`
+		INSERT INTO calculation_history 
+		(user_id, item_name, fixed_cost, variable_cost, target_margin_percentage, cogs, ideal_selling_price, bep_units, bep_revenue) 
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+	`, req.UserID, req.ItemName, req.FixedCost, req.VariableCost, req.TargetMargin, req.COGS, req.IdealSellingPrice, req.BEPUnits, req.BEPRevenue)
+
+	res := StandardResponse{Success: true, Message: "Data saved successfully"}
+	if err != nil {
+		fmt.Println("DB Save Error:", err)
+		res.Success = false
+		res.Message = "Failed to save data"
 	}
 
 	responseJSON, _ := json.Marshal(res)

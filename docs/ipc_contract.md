@@ -85,7 +85,7 @@ Memperbarui data profil UMKM.
 
 ## 4. CalculateProfit
 Menghitung Harga Pokok Penjualan (HPP) dan Break Even Point (BEP).
-*Catatan: Fungsi ini secara otomatis menyimpan riwayat kalkulasi ke dalam database, sehingga UI tidak perlu memanggil fungsi Save terpisah.*
+*Catatan: Fungsi ini HANYA melakukan kalkulasi matematis. Untuk menyimpan hasil ke riwayat, panggil fungsi `SaveHistory` setelah kalkulasi selesai.*
 
 * **Nama Fungsi:** `CalculateProfit`
 * **Payload:**
@@ -108,9 +108,34 @@ Menghitung Harga Pokok Penjualan (HPP) dan Break Even Point (BEP).
   }
   ```
 
+## 5. SaveHistory
+Menyimpan hasil kalkulasi profit ke dalam database riwayat milik user yang sedang login.
+
+* **Nama Fungsi:** `SaveHistory`
+* **Payload:**
+  ```json
+  {
+    "user_id": 2,
+    "item_name": "Produk A",
+    "fixed_cost": 500000,
+    "variable_cost": 8000,
+    "target_margin_percentage": 30,
+    "cogs": 8000,
+    "ideal_selling_price": 10400,
+    "bep_units": 208,
+    "bep_revenue": 2163200
+  }
+  ```
+* **Response:**
+  ```json
+  {
+    "success": true,
+    "message": "Data saved successfully"
+  }
+  ```
 ---
 
-## 5. GetHistory
+## 6. GetHistory
 Mengambil daftar riwayat perhitungan berdasarkan User ID.
 
 * **Nama Fungsi:** `GetHistory`
@@ -135,7 +160,7 @@ Mengambil daftar riwayat perhitungan berdasarkan User ID.
 
 ---
 
-## 6. DeleteHistory
+## 7. DeleteHistory
 Melakukan *Soft Delete* pada riwayat agar tidak tampil lagi di UI.
 
 * **Nama Fungsi:** `DeleteHistory`
