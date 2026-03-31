@@ -26,5 +26,11 @@ func InitDB() {
 		log.Fatal("Failed to execute database schema:", err)
 	}
 
+	_, err = DB.Exec(`INSERT OR IGNORE INTO users (user_id, username, email, umkm_name, password_hash) 
+					  VALUES (1, 'pison', 'pison.studyroom@gmail.com', 'Rempahkarta', 'hash123')`)
+	if err != nil {
+		log.Println("Warning: Failed to create dummy user:", err)
+	}
+
 	fmt.Println("SQLite database initialized successfully.")
 }

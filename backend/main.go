@@ -11,8 +11,20 @@ func main() {
 
 	w := webui.NewWindow()
 
-	fmt.Println("trying to start CuanKlik App...")
-	w.ShowBrowser("frontend/index.html", webui.Chrome)
+	webui.Bind(w, "CalculateProfit", CalculateProfit)
+	webui.Bind(w, "GetHistory", GetHistory)
+	webui.Bind(w, "DeleteHistory", DeleteHistory)
+	webui.Bind(w, "Register", HandleRegister)
+	webui.Bind(w, "Login", HandleLogin)
+	webui.Bind(w, "UpdateProfile", UpdateProfile)
 
+	w.SetPort(8080)
+
+	fmt.Println("=====================================================")
+	fmt.Println("successfully run server! open chrome manually:")
+	fmt.Println("http://localhost:8080/frontend/index.html")
+	fmt.Println("=====================================================")
+
+	w.Show("frontend/index.html")
 	webui.Wait()
 }
