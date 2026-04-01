@@ -143,7 +143,6 @@
     </style>
 </head>
 <body>
-
     <div id="iphone-simulator">
         <div id="modul-auth"></div>
         <div id="modul-calculator"></div>
@@ -187,13 +186,14 @@
             
             for (let modul of modulList) {
                 try {
-                    const response = await fetch(`./views/${modul.file}`);
+                    const response = await fetch(`/views/${modul.file}`);
+                    
                     if (response.ok) {
                         const html = await response.text();
                         document.getElementById(modul.id).innerHTML = html;
                         console.log(`✅ Berhasil memuat: ${modul.file}`);
                     } else {
-                        console.warn(`⚠️ File tidak ditemukan: ${modul.file}`);
+                        console.warn(`⚠️ File tidak ditemukan: ${modul.file} (Status: ${response.status})`);
                     }
                 } catch (error) {
                     console.error(`❌ Gagal fetch ${modul.file}:`, error);
