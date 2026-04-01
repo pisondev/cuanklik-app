@@ -103,8 +103,9 @@
 
     <div id="iphone-simulator">
         <div id="modul-auth"></div>
-        <div id="modul-dashboard"></div>
-        <div id="modul-user"></div>
+        <div id="modul-calculator"></div>
+        <div id="modul-history"></div>
+        <div id="modul-profile"></div>
 
         <div class="bottom-nav" id="bottom-navbar">
             <div class="nav-item" id="nav-kalkulator" onclick="bukaHalaman('view-kalkulator')">Kalkulasi</div>
@@ -125,8 +126,9 @@
             console.log("Mulai memuat modul HTML...");
             const modulList = [
                 { id: 'modul-auth', file: 'auth.html' },
-                { id: 'modul-dashboard', file: 'dashboard.html' },
-                { id: 'modul-user', file: 'user.html' }
+                { id: 'modul-calculator', file: 'calculator.html' }, 
+                { id: 'modul-history', file: 'history.html' },       
+                { id: 'modul-profile', file: 'profile.html' }        
             ];
             
             for (let modul of modulList) {
@@ -137,7 +139,7 @@
                         document.getElementById(modul.id).innerHTML = html;
                         console.log(`✅ Berhasil memuat: ${modul.file}`);
                     } else {
-                        console.warn(`⚠️ File tidak ditemukan (diabaikan sementara): ${modul.file}`);
+                        console.warn(`⚠️ File tidak ditemukan: ${modul.file}`);
                     }
                 } catch (error) {
                     console.error(`❌ Gagal fetch ${modul.file}:`, error);

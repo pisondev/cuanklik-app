@@ -138,9 +138,16 @@ func HandleLogin(e webui.Event) string {
 	var hashFromDB string
 
 	err := DB.QueryRow(`
-		SELECT user_id, umkm_name, email, password_hash 
-		FROM users WHERE username = ?
-	`, req.Username).Scan(&user.UserID, &user.UMKMName, &user.Email, &hashFromDB)
+        SELECT user_id, username, umkm_name, email, phone_number, password_hash 
+        FROM users WHERE username = ?
+    `, req.Username).Scan(
+		&user.UserID,
+		&user.Username,
+		&user.UMKMName,
+		&user.Email,
+		&user.PhoneNumber,
+		&hashFromDB,
+	)
 
 	if err != nil {
 		res.Message = "Username tidak ditemukan"

@@ -59,9 +59,11 @@ type LoginResponse struct {
 }
 
 type UserData struct {
-	UserID   int    `json:"user_id"`
-	UMKMName string `json:"umkm_name"`
-	Email    string `json:"email"`
+	UserID      int    `json:"user_id"`
+	Username    string `json:"username"`
+	UMKMName    string `json:"umkm_name"`
+	Email       string `json:"email"`
+	PhoneNumber string `json:"phone_number"`
 }
 
 type UpdateProfileRequest struct {
