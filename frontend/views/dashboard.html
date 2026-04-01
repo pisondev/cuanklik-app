@@ -1,23 +1,90 @@
 <div id="view-kalkulator" class="screen">
-    <h2>KALKULATOR</h2>
-    <div class="form-group"><label>Produk</label><input type="text" id="item_name" value="Wedang Uwuh"></div>
-    <div class="form-group"><label>B. Tetap</label><input type="number" id="fixed_cost"></div>
-    <div class="form-group"><label>B. Variabel</label><input type="number" id="variable_cost"></div>
-    <div class="form-group"><label>Margin (%)</label><input type="number" id="margin"></div>
+    <div class="dash-container">
+        
+        <div class="dash-top-nav">
+            <button class="dash-icon-btn" onclick="aksiLogout()">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+                </svg>
+                <span id="dash-nav-text">Keluar</span>
+            </button>
+        </div>
 
-    <button class="btn" onclick="hitungProfit()">ANALISIS</button>
-    
-    <div id="btn-group-user" style="display: none;">
-        <button class="btn" id="btn-simpan" onclick="simpanKeRiwayat()" style="display: none; border-style: dashed;">SIMPAN DATA</button>
+        <div class="dash-greeting">
+            <div class="hexagon-avatar">
+                <img src="./assets/profile-logo.png" alt="Profile Logo">
+            </div>
+            <p class="greeting-hello">Halo,</p>
+            <p class="greeting-name" id="display-username">TAMU</p>
+        </div>
+
+        <div class="dash-calc-card">
+            <h2 class="calc-heading">Kalkulator Harga Jual</h2>
+            
+            <div id="calcForm" style="display: flex; flex-direction: column;">
+                
+                <div class="input-wrapper">
+                    <input type="text" id="item_name" class="calc-input" placeholder="Nama Produk" required>
+                    <button class="clear-btn" type="button" onclick="bersihkanInput('item_name')">✕</button>
+                </div>
+                
+                <div class="input-wrapper">
+                    <input type="text" inputmode="numeric" id="fixed_cost" class="calc-input" placeholder="Biaya Tetap" required>
+                    <button class="clear-btn" type="button" onclick="bersihkanInput('fixed_cost')">✕</button>
+                </div>
+
+                <div class="input-wrapper">
+                    <input type="text" inputmode="numeric" id="variable_cost" class="calc-input" placeholder="Biaya Variabel" required>
+                    <button class="clear-btn" type="button" onclick="bersihkanInput('variable_cost')">✕</button>
+                </div>
+
+                <div class="input-wrapper">
+                    <input type="text" inputmode="numeric" id="margin" class="calc-input margin-input" placeholder="Target Margin" required>
+                    <span class="suffix-percent">%</span>
+                    <button class="clear-btn" type="button" onclick="bersihkanInput('margin')">✕</button>
+                </div>
+                
+                <div id="btn-group-user" style="display: none; flex-direction: column; align-items: center;">
+                    <button type="button" class="calc-submit-btn" onclick="hitungProfit()">Analisis Profit</button>
+                </div>
+
+                <div id="btn-group-guest" style="display: none; flex-direction: column; align-items: center;">
+                    <button type="button" class="calc-submit-btn" onclick="hitungProfit()">Analisis Profit</button>
+                    <p style="font-size: 11px; text-align: center; color: rgba(255,255,255,0.7); margin-top: 10px;">
+                        Mode Tamu: Data tidak tersimpan.
+                    </p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div id="btn-group-guest" style="display: none; border: 1px dashed #000; padding: 10px; margin-top: 10px;">
-        <p style="font-size: 10px;">MODE TAMU: DATA TIDAK DISIMPAN</p>
-    </div>
+    <div id="popup-hasil" class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-header">
+                <button class="popup-close-btn" onclick="tutupPopup()">
+                    <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                </button>
+            </div>
+            
+            <div class="popup-results">
+                <div class="popup-input-group">
+                    <label class="popup-label">HPP</label>
+                    <input type="text" id="popup-hpp" class="popup-input" readonly>
+                </div>
+                <div class="popup-input-group">
+                    <label class="popup-label">Harga Jual Ideal</label>
+                    <input type="text" id="popup-hji" class="popup-input" readonly>
+                </div>
+                <div class="popup-input-group">
+                    <label class="popup-label">BEP</label>
+                    <input type="text" id="popup-bep" class="popup-input" readonly>
+                </div>
+            </div>
 
-    <div id="area-hasil" style="margin-top: 15px; border: 1px solid #000; padding: 10px; display: none;">
-        <p id="hasil-teks"></p>
+            <div class="popup-footer" id="popup-footer-action">
+                <button id="btn-save-popup" class="popup-save-btn" onclick="simpanKeRiwayat()">Simpan Kalkulasi</button>
+            </div>
+        </div>
     </div>
-
-    <button id="guest-back-btn" class="btn" style="margin-top: 20px; display: none;" onclick="aksiLogout()">KEMBALI KE HOME</button>
 </div>

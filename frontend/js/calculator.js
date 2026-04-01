@@ -1,11 +1,66 @@
-let dataKalkulasiSementara = null; 
+let dataKalkulasiSementara = null;
+
+function formatRupiah(angka, prefix) {
+    let number_string = angka.replace(/[^,\d]/g, '').toString(),
+        split = number_string.split(','),
+        sisa = split[0].length % 3,
+        rupiah = split[0].substr(0, sisa),
+        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+    if (ribuan) {
+        let separator = sisa ? '.' : '';
+        rupiah += separator + ribuan.join('.');
+    }
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp ' + rupiah : '');
+}
+
+setTimeout(() => {
+    ['fixed_cost', 'variable_cost'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) {
+            el.addEventListener('keyup', function(e) {
+                this.value = formatRupiah(this.value, 'Rp ');
+                this.classList.remove('input-error');
+            });
+        }
+    });
+
+    ['item_name', 'margin'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) {
+            el.addEventListener('input', function() {
+                this.classList.remove('input-error');
+            });
+        }
+    });
+}, 500);
 
 async function hitungProfit() {
+    const itemName = document.getElementById('item_name');
+    const fixedCost = document.getElementById('fixed_cost');
+    const variableCost = document.getElementById('variable_cost');
+    const margin = document.getElementById('margin');
+
+    let isValid = true;
+    [itemName, fixedCost, variableCost, margin].forEach(el => {
+        if (!el.value.trim() || el.value === 'Rp ') {
+            el.classList.add('input-error');
+            isValid = false;
+        }
+    });
+
+    if (!isValid) {
+        alert("Mohon lengkapi form yang ditandai merah.");
+        return;
+    }
+
+    const parseCurrency = (val) => parseFloat(val.replace(/Rp\s?|\./g, '')) || 0;
     const payload = {
-        item_name: document.getElementById('item_name').value,
-        fixed_cost: parseFloat(document.getElementById('fixed_cost').value),
-        variable_cost: parseFloat(document.getElementById('variable_cost').value),
-        target_margin_percentage: parseFloat(document.getElementById('margin').value)
+        item_name: itemName.value,
+        fixed_cost: parseCurrency(fixedCost.value),
+        variable_cost: parseCurrency(variableCost.value),
+        target_margin_percentage: parseFloat(margin.value)
     };
 
     try {
@@ -23,18 +78,27 @@ async function hitungProfit() {
             bep_revenue: response.bep_revenue
         };
 
-        document.getElementById('area-hasil').style.display = 'block';
-        document.getElementById('hasil-teks').innerHTML = `
-            <b>Produk:</b> ${response.item_name} <br>
-            <b>HPP:</b> Rp ${response.cogs.toLocaleString('id-ID')} <br>
-            <b>Harga Jual Ideal:</b> Rp ${response.ideal_selling_price.toLocaleString('id-ID')} <br>
-            <b>BEP (Unit):</b> ${response.bep_units} <br>
-            <b>BEP (Rupiah):</b> Rp ${response.bep_revenue.toLocaleString('id-ID')}
-        `;
+        document.getElementById('popup-hpp').value = `Rp ${response.cogs.toLocaleString('id-ID')}`;
+        document.getElementById('popup-hji').value = `Rp ${response.ideal_selling_price.toLocaleString('id-ID')}`;
+        document.getElementById('popup-bep').value = `${response.bep_units} Unit / Rp ${response.bep_revenue.toLocaleString('id-ID')}`;
+
+        const saveBtn = document.getElementById('btn-save-popup');
+        if (saveBtn) {
+            saveBtn.innerText = "Simpan Kalkulasi";
+            saveBtn.style.background = "linear-gradient(90deg, #4624C2 0%, #7F5BFF 100%)";
+            saveBtn.style.cursor = "pointer";
+            saveBtn.disabled = false;
+        }
 
         if (!isGuestMode && localStorage.getItem('user_data')) {
-            document.getElementById('btn-simpan').style.display = 'inline-block';
+            document.getElementById('popup-footer-action').style.display = 'block';
+        } else {
+            document.getElementById('popup-footer-action').style.display = 'none';
         }
+
+        const popup = document.getElementById('popup-hasil');
+        popup.style.display = 'flex';
+        setTimeout(() => { popup.classList.add('show-popup'); }, 10);
 
     } catch (error) {
         console.error("Error Hitung Profit:", error);
@@ -42,18 +106,22 @@ async function hitungProfit() {
     }
 }
 
+function tutupPopup() {
+    const popup = document.getElementById('popup-hasil');
+    popup.classList.remove('show-popup');
+    
+    setTimeout(() => { 
+        popup.style.display = 'none'; 
+    }, 300); 
+}
+
 async function simpanKeRiwayat() {
     if (!dataKalkulasiSementara) return;
-
     const userDataStr = localStorage.getItem("user_data");
-    if (!userDataStr) {
-        alert("Silakan login terlebih dahulu.");
-        return;
-    }
-    const userData = JSON.parse(userDataStr);
+    if (!userDataStr) return;
 
     const payload = {
-        user_id: userData.user_id,
+        user_id: JSON.parse(userDataStr).user_id,
         ...dataKalkulasiSementara
     };
 
@@ -62,14 +130,31 @@ async function simpanKeRiwayat() {
         while (typeof response === 'string') response = JSON.parse(response);
 
         if (response.success) {
-            alert("Data berhasil disimpan ke riwayat!");
-            document.getElementById('btn-simpan').style.display = 'none'; 
-            dataKalkulasiSementara = null; 
+            const saveBtn = document.getElementById('btn-save-popup');
+            saveBtn.innerText = "Kalkulasi Tersimpan";
+            saveBtn.style.background = "#A0A0A0";
+            saveBtn.style.cursor = "not-allowed";
+            saveBtn.disabled = true;
+
+            document.getElementById('item_name').value = '';
+            document.getElementById('fixed_cost').value = '';
+            document.getElementById('variable_cost').value = '';
+            document.getElementById('margin').value = '';
+            
+            dataKalkulasiSementara = null;
         } else {
             alert("Gagal menyimpan: " + response.message);
         }
     } catch (error) {
         console.error("Error Save History:", error);
-        alert("Terjadi kesalahan sistem saat menyimpan.");
+    }
+}
+
+window.bersihkanInput = function(id) {
+    const el = document.getElementById(id);
+    if (el) {
+        el.value = ''; 
+        el.focus();    
+        el.classList.remove('input-error'); 
     }
 }
