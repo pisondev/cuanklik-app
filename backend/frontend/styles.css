@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
 /* ===== MAIN LAYOUT STYLES ===== */
 html,
 body {
@@ -219,342 +221,227 @@ body {
   border-radius: 20px;
 }
 
-/* ===== LOGIN PAGE STYLES ===== */
-.login-title {
-  left: 36px;
-  top: 232px;
-  position: absolute;
-  color: black;
-  font-size: 34px;
-  font-family: Work Sans;
-  font-weight: 700;
-  line-height: 41px;
-  letter-spacing: 0.37px;
-  word-wrap: break-word;
-}
-
-.login-description {
-  width: 302px;
-  left: 36px;
-  top: 280px;
-  position: absolute;
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 17px;
-  font-family: Open Sans;
-  font-weight: 400;
-  line-height: 22px;
-  word-wrap: break-word;
-}
-
-.signup {
-  width: 174px;
-  left: 36px;
-  top: 553px;
-  position: absolute;
-}
-
-.signup span {
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 12px;
-  font-family: Open Sans;
-  font-weight: 400;
-  line-height: 16px;
-  word-wrap: break-word;
-}
-
-.signup span:last-child {
-  font-weight: 700;
-}
-
-.button-container {
-  width: 302px;
-  height: 44px;
-  left: 36px;
-  top: 493px;
-  position: absolute;
-}
-
-.button-bg {
-  width: 302px;
-  height: 44px;
-  left: 0px;
-  top: 0px;
-  position: absolute;
-  background: linear-gradient(315deg, #4624c2 0%, #7f5bff 100%);
-  box-shadow:
-    0px 20px 40px #bdacfb,
-    3px 1px 15px rgba(255, 255, 255, 0.5) inset,
-    0px -3px 10px rgba(0, 0, 0, 0.37) inset;
-  border-radius: 18px;
-}
-
-.button-text {
-  width: 274px;
-  height: 21.04px;
-  left: 14px;
-  top: 11px;
-  position: absolute;
-  text-align: center;
-  color: white;
-  font-size: 17px;
-  font-family: SF Pro;
-  font-weight: 590;
-  line-height: 22px;
-  word-wrap: break-word;
-}
-
-.input-container {
-  width: 302px;
-  left: 36px;
-  top: 353px;
-  position: absolute;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 10px;
-  display: inline-flex;
-}
-
-.input-border {
-  width: 302px;
-  height: 44px;
-  left: 0px;
-  top: 0px;
-  position: absolute;
-  border-radius: 18px;
-  border: 1px #c9d7ee solid;
-}
-
-.input-field {
-  width: 274px;
-  height: 22px;
-  left: 12px;
-  top: 11px;
-  position: absolute;
-  color: black;
-  font-size: 17px;
-  font-family: SF Pro;
-  font-weight: 400;
-  line-height: 22px;
-  word-wrap: break-word;
-  border: none;
-  background: transparent;
-  outline: none;
-}
-
-.password-container {
-  width: 302px;
-  left: 36px;
-  top: 423px;
-  position: absolute;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 10px;
-  display: inline-flex;
-}
-
-.password-border {
-  width: 302px;
-  height: 44px;
-  left: 0px;
-  top: 0px;
-  position: absolute;
-  border-radius: 18px;
-  border: 1px #c9d7ee solid;
-}
-
-.password-field {
-  width: 274px;
-  height: 22px;
-  left: 12px;
-  top: 11px;
-  position: absolute;
-  color: black;
-  font-size: 17px;
-  font-family: SF Pro;
-  font-weight: 400;
-  line-height: 22px;
-  word-wrap: break-word;
-  border: none;
-  background: transparent;
-  outline: none;
-}
-
-/* ===== REGISTER PAGE STYLES ===== */
-.register-card {
+/* ===== LOGIN PAGE STYLES (Refactored to Flexbox) ===== */
+.login-card {
   width: 343px;
-  height: 655px;
-  left: 16px;
-  top: 79px;
-  position: absolute;
-  background: linear-gradient(
-    143deg,
-    white 0%,
-    rgba(242.25, 246.5, 255, 0.52) 48%,
-    rgba(173.85, 190.28, 223.13, 0) 100%
-  );
-  box-shadow:
-    0px 15px 30px rgba(255, 255, 255, 0.5) inset,
-    0px 30px 60px #98a7c5,
-    -10px -10px 20px rgba(209.24, 219.35, 238, 0.5) inset;
+  min-height: 400px;
+  margin: 120px auto 20px auto;
+  padding: 30px 20px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; 
+  
+  background: linear-gradient(143deg, white 0%, rgba(242.25, 246.5, 255, 0.52) 48%, rgba(173.85, 190.28, 223.13, 0) 100%);
+  box-shadow: 0px 15px 30px rgba(255, 255, 255, 0.5) inset, 0px 30px 60px #98a7c5, -10px -10px 20px rgba(209.24, 219.35, 238, 0.5) inset;
   border-radius: 20px;
 }
 
-.register-title {
-  left: 37px;
-  top: 104px;
-  position: absolute;
+.login-title {
   color: black;
   font-size: 34px;
-  font-family: Work Sans;
+  font-family: 'Nunito', sans-serif; 
   font-weight: 700;
-  line-height: 41px;
-  letter-spacing: 0.37px;
-  word-wrap: break-word;
+  text-align: left;
+  align-self: flex-start; 
+  margin: 0;
 }
 
-.register-description {
-  width: 302px;
-  left: 37px;
-  top: 152px;
-  position: absolute;
+.login-description {
   color: rgba(0, 0, 0, 0.7);
-  font-size: 17px;
-  font-family: Open Sans;
-  font-weight: 400;
-  line-height: 22px;
-  word-wrap: break-word;
+  font-size: 15px;
+  font-family: 'Nunito', sans-serif;
+  text-align: left;
+  align-self: flex-start;
+  margin: 0;
+  margin-bottom: 10px;
 }
 
-.register-signup {
-  width: 176px;
-  left: 37px;
-  top: 674px;
-  position: absolute;
-}
-
-.register-signup span {
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 12px;
-  font-family: Open Sans;
-  font-weight: 400;
-  line-height: 16px;
-  word-wrap: break-word;
-}
-
-.register-signup .link-text {
-  font-weight: 700;
-}
-
-.register-button-container {
-  width: 302px;
-  height: 44px;
-  left: 37px;
-  top: 614px;
-  position: absolute;
-}
-
-.register-button-bg {
-  width: 302px;
-  height: 44px;
-  left: 0px;
-  top: 0px;
-  position: absolute;
-  background: linear-gradient(315deg, #4624c2 0%, #7f5bff 100%);
-  box-shadow:
-    0px 20px 40px #bdacfb,
-    3px 1px 15px rgba(255, 255, 255, 0.5) inset,
-    0px -3px 10px rgba(0, 0, 0, 0.37) inset;
-  border-radius: 18px;
-}
-
-.register-button-text {
-  width: 274px;
-  height: 21.04px;
-  left: 14px;
-  top: 11px;
-  position: absolute;
-  text-align: center;
-  color: white;
-  font-size: 17px;
-  font-family: SF Pro;
-  font-weight: 590;
-  line-height: 22px;
-  word-wrap: break-word;
-}
-
-.register-input-1 {
-  width: 302px;
-  height: 44px;
-  left: 37px;
-  top: 218px;
-  position: absolute;
-}
-
-.register-input-2 {
-  width: 302px;
-  height: 44px;
-  left: 37px;
-  top: 282px;
-  position: absolute;
-}
-
-.register-input-3 {
-  width: 302px;
-  height: 44px;
-  left: 37px;
-  top: 346px;
-  position: absolute;
-}
-
-.register-input-4 {
-  width: 302px;
-  height: 44px;
-  left: 37px;
-  top: 409px;
-  position: absolute;
-}
-
-.register-input-5 {
-  width: 302px;
-  height: 44px;
-  left: 37px;
-  top: 473px;
-  position: absolute;
-}
-
-.register-input-6 {
-  width: 302px;
-  height: 44px;
-  left: 36px;
-  top: 537px;
-  position: absolute;
-}
-
-.register-input-field {
+.login-form {
   width: 100%;
-  height: 100%;
-  padding: 11px 16px 11px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; 
+}
+
+.login-input-field {
+  width: 100%;
+  height: 44px;
+  padding: 11px 16px;
   border-radius: 18px;
   border: 1px #c9d7ee solid;
   box-sizing: border-box;
   color: black;
-  font-size: 17px;
-  font-family: SF Pro;
-  font-weight: 400;
-  line-height: 22px;
-  background: transparent;
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif;
+  background: white;
   outline: none;
 }
 
-.link-text {
-  color: rgba(0, 0, 0, 0.7);
-  font-size: 12px;
-  font-family: Open Sans;
+.login-btn-submit {
+  width: 100%;
+  height: 44px;
+  margin-top: 10px;
+  background: linear-gradient(315deg, #4624c2 0%, #7f5bff 100%);
+  box-shadow: 0px 20px 40px #bdacfb, 3px 1px 15px rgba(255, 255, 255, 0.5) inset, 0px -3px 10px rgba(0, 0, 0, 0.37) inset;
+  border-radius: 18px;
+  border: none;
+  color: white;
+  font-size: 17px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-signup {
+  align-self: flex-start;
+  margin-top: 5px;
+}
+
+.login-signup span {
+  color: #888888;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
   font-weight: 400;
-  line-height: 16px;
-  word-wrap: break-word;
+}
+
+.login-signup .link-text {
+  color: #888888;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.login-btn-cancel {
+  width: 180px;
+  padding: 10px;
+  margin-top: 5px;
+  background: transparent;
+  border: 2px solid #7f5bff;
+  color: #7f5bff;
+  border-radius: 18px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  position: static; 
+  text-align: center;
+}
+
+/* ===== REGISTER PAGE STYLES (Refactored to Flexbox) ===== */
+.register-card {
+  width: 343px;
+  min-height: 500px;
+  margin: 60px auto 20px auto; 
+  padding: 30px 20px;
+  position: relative; 
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 20px;
+  
+  background: linear-gradient(143deg, white 0%, rgba(242.25, 246.5, 255, 0.52) 48%, rgba(173.85, 190.28, 223.13, 0) 100%);
+  box-shadow: 0px 15px 30px rgba(255, 255, 255, 0.5) inset, 0px 30px 60px #98a7c5, -10px -10px 20px rgba(209.24, 219.35, 238, 0.5) inset;
+  border-radius: 20px;
+}
+.register-title {
+  color: black;
+  font-size: 34px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  text-align: left;         
+  align-self: flex-start;  
+  margin: 0;
+}
+
+.register-description {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 15px;
+  font-family: 'Nunito', sans-serif;
+  text-align: left;         
+  align-self: flex-start; 
+  margin: 0;
+  margin-bottom: 10px;     
+}
+
+.register-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; 
+}
+
+.register-btn-submit {
+  width: 100%;
+  height: 44px;
+  margin-top: 10px; 
+  background: linear-gradient(315deg, #4624c2 0%, #7f5bff 100%);
+  box-shadow: 0px 20px 40px #bdacfb, 3px 1px 15px rgba(255, 255, 255, 0.5) inset, 0px -3px 10px rgba(0, 0, 0, 0.37) inset;
+  border-radius: 18px;
+  border: none;
+  color: white;
+  font-size: 17px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-signup {
+  align-self: flex-start; 
+  margin-top: 5px;
+}
+
+.register-signup span {
+  color: #888888; 
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 400;
+}
+
+.register-signup .link-text {
+  color: #888888; 
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  text-decoration: none; 
+}
+
+.register-input-field {
+  width: 100%;
+  height: 44px;
+  padding: 11px 16px;
+  border-radius: 18px;
+  border: 1px #c9d7ee solid;
+  box-sizing: border-box;
+  color: black;
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif;
+  background: white;
+  outline: none;
+}
+
+.register-btn-cancel {
+  width: 150px;
+  padding: 10px;
+  margin-top: 5px;
+  background: transparent;
+  border: 2px solid #7f5bff;
+  color: #7f5bff;
+  border-radius: 18px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  position: static; 
+  text-align: center;
 }
 
 /* ===== DASHBOARD (KALKULATOR) STYLES ===== */

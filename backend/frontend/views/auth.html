@@ -22,66 +22,50 @@
 <div id="view-login" class="screen">
     <div class="outer">
         <div class="phone"></div>
-        <div class="card"></div>
-        <div class="login-title">Masuk</div>
-        <div class="login-description">Akses kalkulasi Harga Pokok Penjualan disini!</div>
         
-        <div class="signup">
-            <span>Belum ada akun?</span><a href="#" class="link-text" onclick="bukaHalaman('view-register'); return false;"> daftar disini</a>
+        <div class="login-card">
+            <h2 class="login-title">Masuk</h2>
+            <p class="login-description">Akses kalkulasi Harga Pokok Penjualan disini!</p>
+            
+            <form onsubmit="prosesLogin(event)" class="login-form">
+                <input class="login-input-field" type="text" id="login_username" placeholder="Username" required />
+                <input class="login-input-field" type="password" id="login_password" placeholder="Password" required />
+                
+                <button type="submit" class="login-btn-submit">Masuk</button>
+            </form>
+            
+            <div class="login-signup">
+                <span>Belum ada akun?</span><a href="#" class="link-text" onclick="bukaHalaman('view-register'); return false;"> daftar disini</a>
+            </div>
+
+            <button class="login-btn-cancel" type="button" onclick="bukaHalaman('view-home')">Kembali ke Home</button>
         </div>
-
-        <form onsubmit="prosesLogin(event)">
-            <div class="input-container">
-                <div style="align-self: stretch; height: 44px; position: relative">
-                    <div class="input-border"></div>
-                    <input class="input-field" type="text" id="login_username" placeholder="Username" required />
-                </div>
-            </div>
-            <div class="password-container">
-                <div style="align-self: stretch; height: 44px; position: relative">
-                    <div class="password-border"></div>
-                    <input class="password-field" type="password" id="login_password" placeholder="Password" required />
-                </div>
-            </div>
-
-            <button type="submit" style="background:transparent; border:none; padding:0; cursor:pointer;">
-                <div class="button-container" style="top: 493px;">
-                    <div class="button-bg"></div>
-                    <div class="button-text">Masuk</div>
-                </div>
-            </button>
-        </form>
-        
-        <button class="button" style="position:absolute; top: 730px; left: 112px; width: 150px; background: transparent; border: 2px solid #7f5bff; color: #7f5bff;" onclick="bukaHalaman('view-home')">Kembali ke Home</button>
     </div>
 </div>
 
 <div id="view-register" class="screen">
     <div class="outer">
         <div class="phone"></div>
-        <div class="register-card"></div>
-        <div class="register-title">Daftar</div>
-        <div class="register-description">Buat akun untuk mengakses kalkulasi disini!</div>
         
-        <div class="register-signup">
-            <span>Sudah ada akun?</span><a href="#" class="link-text" onclick="bukaHalaman('view-login'); return false;"> masuk disini</a>
-        </div>
-
-        <form onsubmit="prosesRegister(event)">
-            <div class="register-input-1"><input class="register-input-field" type="text" id="reg_username" placeholder="Username" required /></div>
-            <div class="register-input-2"><input class="register-input-field" type="text" id="reg_umkm" placeholder="Nama UMKM" required /></div>
-            <div class="register-input-3"><input class="register-input-field" type="email" id="reg_email" placeholder="Email" required /></div>
-            <div class="register-input-4"><input class="register-input-field" type="tel" id="reg_phone" placeholder="No Telepon" required /></div>
-            <div class="register-input-5"><input class="register-input-field" type="password" id="reg_password" placeholder="Password" required /></div>
+        <div class="register-card">
+            <h2 class="register-title">Daftar</h2>
+            <p class="register-description">Buat akun untuk mengakses kalkulasi disini!</p>
             
-            <button type="submit" style="background:transparent; border:none; padding:0; cursor:pointer;">
-                <div class="register-button-container">
-                    <div class="register-button-bg"></div>
-                    <div class="register-button-text">Daftar</div>
-                </div>
-            </button>
-        </form>
-        
-        <button class="button" style="position:absolute; top: 740px; left: 112px; width: 150px; background: transparent; border: 2px solid #7f5bff; color: #7f5bff;" onclick="bukaHalaman('view-home')">Batal</button>
+            <form onsubmit="prosesRegister(event)" class="register-form">
+                <input class="register-input-field" type="text" id="reg_username" placeholder="Username" required />
+                <input class="register-input-field" type="text" id="reg_umkm" placeholder="Nama UMKM" required />
+                <input class="register-input-field" type="email" id="reg_email" placeholder="Email" required />
+                <input class="register-input-field" type="tel" id="reg_phone" placeholder="No Telepon" required />
+                <input class="register-input-field" type="password" id="reg_password" placeholder="Password" required />
+                
+                <button type="submit" class="register-btn-submit">Daftar</button>
+            </form>
+            
+            <div class="register-signup">
+                <span>Sudah ada akun?</span><a href="#" class="link-text" onclick="bukaHalaman('view-login'); return false;"> masuk disini</a>
+            </div>
+
+            <button class="register-btn-cancel" type="button" onclick="bukaHalaman('view-home')">Batal</button>
+        </div>
     </div>
 </div>
