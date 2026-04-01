@@ -60,10 +60,22 @@ function bukaPopupRiwayat(historyId) {
 
     const formatRp = (angka) => 'Rp ' + Number(angka).toLocaleString('id-ID');
 
+    const strHPP = formatRp(item.cogs);
+    const strHJI = formatRp(item.ideal_selling_price);
+    const strBEPUnit = item.bep_units + ' Unit';
+    const strBEPRevenue = formatRp(item.bep_revenue);
+
     document.getElementById('popup-riwayat-title').innerText = item.item_name;
-    document.getElementById('popup-riwayat-hpp').value = formatRp(item.cogs);
-    document.getElementById('popup-riwayat-hji').value = formatRp(item.ideal_selling_price);
-    document.getElementById('popup-riwayat-bep').value = `${item.bep_units} Unit / ${formatRp(item.bep_revenue)}`;
+    document.getElementById('popup-riwayat-hpp').value = strHPP;
+    document.getElementById('popup-riwayat-hji').value = strHJI;
+    document.getElementById('popup-riwayat-bep').value = `${strBEPUnit} / ${strBEPRevenue}`;
+
+    const kalimatUtama = `Dari modal per produk sebesar <b>${strHPP}</b> (HPP), kamu disarankan menjualnya dengan harga <b>${strHJI}</b> (HJI).`;
+    
+    const kalimatTarget = `Target penjualan minimal yang perlu kamu raih agar tidak rugi adalah sebanyak <b>${strBEPUnit}</b> atau setara dengan omzet <b>${strBEPRevenue}</b>.`;
+    
+    document.getElementById('popup-riwayat-insight-main').innerHTML = kalimatUtama;
+    document.getElementById('popup-riwayat-insight-target').innerHTML = kalimatTarget;
 
     const popup = document.getElementById('popup-riwayat');
     popup.style.display = 'flex';
