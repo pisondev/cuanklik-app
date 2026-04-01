@@ -20,11 +20,14 @@ type GetHistoryRequest struct {
 }
 
 type HistoryItem struct {
-	HistoryID    int     `json:"history_id"`
-	ItemName     string  `json:"item_name"`
-	SellingPrice float64 `json:"selling_price"`
-	CreatedAt    string  `json:"created_at"`
-	UpdatedAt    string  `json:"updated_at"`
+	HistoryID         int     `json:"history_id"`
+	ItemName          string  `json:"item_name"`
+	COGS              float64 `json:"cogs"`
+	IdealSellingPrice float64 `json:"ideal_selling_price"`
+	BEPUnits          int     `json:"bep_units"`
+	BEPRevenue        float64 `json:"bep_revenue"`
+	CreatedAt         string  `json:"created_at"`
+	UpdatedAt         string  `json:"updated_at"`
 }
 
 type DeleteHistoryRequest struct {

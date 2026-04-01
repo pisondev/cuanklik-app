@@ -1,47 +1,52 @@
+let databaseRiwayatLokal = [];
+
 async function muatRiwayat() {
     const userDataStr = localStorage.getItem("user_data");
-    if (!userDataStr) {
-        console.warn("User belum login, menghentikan muat riwayat.");
-        return;
-    }
+    if (!userDataStr) return;
     const userData = JSON.parse(userDataStr);
 
     try {
         let response = await GetHistory(JSON.stringify({ user_id: userData.user_id }));
-        
-        while (typeof response === 'string') {
-            response = JSON.parse(response);
-        }
+        while (typeof response === 'string') response = JSON.parse(response);
 
-        console.log("Data riwayat diterima:", response);
+        const listContainer = document.getElementById("history_list_container");
+        if (!listContainer) return; 
 
-        const tbody = document.getElementById("tabel_riwayat_body");
-        if (!tbody) return; 
+        listContainer.innerHTML = ""; 
+        databaseRiwayatLokal = response; 
 
-        tbody.innerHTML = ""; 
-
-        if (response.length === 0) {
-            tbody.innerHTML = "<tr><td colspan='4' style='text-align:center;'>Belum ada riwayat kalkulasi.</td></tr>";
+        if (!response || response.length === 0) {
+            listContainer.innerHTML = `
+                <div style="text-align:center; padding: 40px 20px; background: rgba(255,255,255,0.5); border-radius: 20px;">
+                    <p style="color:#6D6B8C; font-weight: 600; font-family: 'Open Sans', sans-serif;">Belum ada riwayat kalkulasi.</p>
+                </div>
+            `;
             return;
         }
 
-        response.forEach((item, index) => {
-            const tr = document.createElement("tr");
+        response.forEach((item) => {
+            const card = document.createElement("div");
+            card.className = "history-card";
             
-            const tanggal = new Date(item.created_at).toLocaleDateString('id-ID', {
-                day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
-            });
+            card.onclick = () => bukaPopupRiwayat(item.history_id);
 
-            tr.innerHTML = `
-                <td>${index + 1}</td>
-                <td>${item.item_name}</td>
-                <td>Rp ${item.selling_price.toLocaleString('id-ID')}</td>
-                <td>${tanggal}</td>
-                <td>
-                    <button onclick="hapusRiwayat(${item.history_id})">Hapus</button>
-                </td>
+            const hargaIdeal = Number(item.ideal_selling_price) || 0;
+            const formatRp = 'Rp ' + hargaIdeal.toLocaleString('id-ID');
+
+            card.innerHTML = `
+                <div class="history-card-content">
+                    <p class="history-item-name">${item.item_name}</p>
+                </div>
+                <button class="history-delete-btn" onclick="hapusRiwayat(event, ${item.history_id})">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                </button>
             `;
-            tbody.appendChild(tr);
+            listContainer.appendChild(card);
         });
 
     } catch (error) {
@@ -49,23 +54,43 @@ async function muatRiwayat() {
     }
 }
 
-async function hapusRiwayat(historyId) {
-    if (!confirm("Yakin ingin menghapus riwayat ini? Data akan dipindah ke tempat sampah.")) {
-        return;
-    }
+function bukaPopupRiwayat(historyId) {
+    const item = databaseRiwayatLokal.find(x => x.history_id === historyId);
+    if (!item) return;
+
+    const formatRp = (angka) => 'Rp ' + Number(angka).toLocaleString('id-ID');
+
+    document.getElementById('popup-riwayat-title').innerText = item.item_name;
+    document.getElementById('popup-riwayat-hpp').value = formatRp(item.cogs);
+    document.getElementById('popup-riwayat-hji').value = formatRp(item.ideal_selling_price);
+    document.getElementById('popup-riwayat-bep').value = `${item.bep_units} Unit / ${formatRp(item.bep_revenue)}`;
+
+    const popup = document.getElementById('popup-riwayat');
+    popup.style.display = 'flex';
+    setTimeout(() => { popup.classList.add('show-popup'); }, 10);
+}
+
+function tutupPopupRiwayat() {
+    const popup = document.getElementById('popup-riwayat');
+    popup.classList.remove('show-popup');
+    setTimeout(() => { popup.style.display = 'none'; }, 300);
+}
+
+async function hapusRiwayat(event, historyId) {
+    event.stopPropagation(); 
+
+    if (!confirm("Yakin ingin menghapus riwayat produk ini?")) return;
 
     try {
         let response = await DeleteHistory(JSON.stringify({ history_id: historyId }));
         while (typeof response === 'string') response = JSON.parse(response);
 
         if (response.success) {
-            alert("Riwayat berhasil dihapus.");
-            muatRiwayat(); 
+            muatRiwayat();
         } else {
             alert("Gagal menghapus: " + response.message);
         }
     } catch (error) {
         console.error("Error DeleteHistory:", error);
-        alert("Terjadi kesalahan sistem saat menghapus.");
     }
 }

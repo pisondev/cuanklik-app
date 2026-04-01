@@ -1,21 +1,39 @@
 <div id="view-riwayat" class="screen">
-    <h2>RIWAYAT</h2>
-    <button class="btn" onclick="muatRiwayat()">REFRESH</button>
-    <table>
-        <thead><tr><th>PRODUK</th><th>HARGA</th><th>AKSI</th></tr></thead>
-        <tbody id="tabel_riwayat_body"></tbody>
-    </table>
-</div>
+    <div class="history-container">
+        <div class="history-header">
+            <button class="history-back-btn" onclick="bukaHalaman('view-kalkulator')">
+                <svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            </button>
+            <h2 class="history-title">RIWAYAT</h2>
+        </div>
+        
+        <div id="history_list_container" class="history-list">
+            </div>
+    </div>
 
-<div id="view-profil" class="screen">
-    <h2>PROFIL</h2>
-    <form onsubmit="simpanProfil(event)">
-        <div class="form-group"><label>Email</label><input type="email" id="prof_email"></div>
-        <div class="form-group"><label>No. HP</label><input type="text" id="prof_phone"></div>
-        <div class="form-group"><label>Nama UMKM</label><input type="text" id="prof_umkm"></div>
-        <button type="submit" class="btn">UPDATE PROFIL</button>
-    </form>
-    
-    <hr style="margin-top: 30px;">
-    <button class="btn" onclick="aksiLogout()" style="background: #000; color: #fff;">LOGOUT</button>
+    <div id="popup-riwayat" class="popup-overlay">
+        <div class="popup-container">
+            <div class="popup-header" style="align-items: center; justify-content: space-between; border-bottom: 2px solid #EAEAEA; padding-bottom: 10px; margin-bottom: 5px;">
+                <h3 id="popup-riwayat-title" style="margin: 0; font-weight: 800; color: #1F1A4D; text-transform: uppercase;">Nama Produk</h3>
+                <button class="popup-close-btn" style="margin: 0;" onclick="tutupPopupRiwayat()">
+                    <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                </button>
+            </div>
+            
+            <div class="popup-results">
+                <div class="popup-input-group">
+                    <label class="popup-label">Harga Pokok Penjualan (HPP)</label>
+                    <input type="text" id="popup-riwayat-hpp" class="popup-input" readonly>
+                </div>
+                <div class="popup-input-group">
+                    <label class="popup-label">Harga Jual Ideal (HJI)</label>
+                    <input type="text" id="popup-riwayat-hji" class="popup-input" readonly>
+                </div>
+                <div class="popup-input-group">
+                    <label class="popup-label">Break Even Point (BEP)</label>
+                    <input type="text" id="popup-riwayat-bep" class="popup-input" readonly>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -853,3 +853,120 @@ body {
 }
 
 .popup-save-btn:active { transform: scale(0.95); }
+
+
+/* ===== HISTORY (RIWAYAT) STYLES ===== */
+.history-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #F0F5FF; 
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 20px;
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 10px 20px 30px 20px;
+}
+
+.history-back-btn {
+  position: absolute;
+  left: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1F1A4D;
+  padding: 0;
+  display: flex;
+}
+
+.history-back-btn svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+
+.history-title {
+  font-weight: 800;
+  font-size: 20px;
+  color: #1F1A4D;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 20px 90px 20px;
+}
+
+.history-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px; 
+  border-radius: 50px;
+  background: linear-gradient(160deg, rgba(255,255,255,1) 0%, rgba(242,246,255,0.8) 48%, rgba(174,190,223,0.3) 100%);
+  background-color: #FFFFFF;
+  box-shadow: 0 8px 20px rgba(174, 190, 223, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.history-card:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 10px rgba(174, 190, 223, 0.2);
+}
+
+.history-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.history-item-name {
+  font-weight: 800;
+  font-size: 16px;
+  color: #1F1A4D;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.history-delete-btn {
+  background: #F4F5FA;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.history-delete-btn:active {
+  transform: scale(0.85);
+}
+
+.history-delete-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: #7B7995;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.history-delete-btn:hover {
+  background: #EAEAEA; 
+}
+
+.history-delete-btn:hover svg {
+  stroke: #1F1A4D; 
+}

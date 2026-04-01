@@ -43,11 +43,11 @@ func GetHistory(e webui.Event) string {
 	json.Unmarshal([]byte(payloadJSON), &req)
 
 	rows, err := DB.Query(`
-		SELECT history_id, item_name, ideal_selling_price, created_at, updated_at 
-		FROM calculation_history 
-		WHERE user_id = ? AND deleted_at IS NULL
-		ORDER BY created_at DESC
-	`, req.UserID)
+        SELECT history_id, item_name, cogs, ideal_selling_price, bep_units, bep_revenue, created_at, updated_at 
+        FROM calculation_history 
+        WHERE user_id = ? AND deleted_at IS NULL
+        ORDER BY created_at DESC
+    `, req.UserID)
 
 	historyList := []HistoryItem{}
 
@@ -55,8 +55,12 @@ func GetHistory(e webui.Event) string {
 		defer rows.Close()
 		for rows.Next() {
 			var item HistoryItem
-			rows.Scan(&item.HistoryID, &item.ItemName, &item.SellingPrice, &item.CreatedAt, &item.UpdatedAt)
-			historyList = append(historyList, item)
+			err := rows.Scan(&item.HistoryID, &item.ItemName, &item.COGS, &item.IdealSellingPrice, &item.BEPUnits, &item.BEPRevenue, &item.CreatedAt, &item.UpdatedAt)
+			if err == nil {
+				historyList = append(historyList, item)
+			} else {
+				fmt.Println("Row Scan Error:", err)
+			}
 		}
 	} else {
 		fmt.Println("DB Query Error:", err)
